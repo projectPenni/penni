@@ -3,6 +3,8 @@ import http from 'http';
 import Message from 'Message';
 import Loading from 'Loading';
 
+import "styles/main.scss";
+
 export default class App extends React.Component {
   constructor() {
     super();
