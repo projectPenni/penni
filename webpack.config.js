@@ -34,7 +34,7 @@ module.exports = [{
   target: 'web',
   entry: './src/client.js',
   output: {
-    filename: "./static/client.js",
+    filename: "./static/build/client.js",
   },
   resolve: {
     root: __dirname,

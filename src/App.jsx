@@ -38,14 +38,14 @@ export default class App extends React.Component {
 
       res.on('end', () => {
         replies = replies.split('SPLITPOINT');
-        console.log(replies);
+
         replies = replies.map((reply, index) => {
           return (<Message
             text={reply}
             key={index+this.state.dialogueEntries.length}
           />);
         });
-        console.log(replies);
+
         this.setState({
           dialogueEntries: this.state.dialogueEntries.concat(replies),
           loading: false,

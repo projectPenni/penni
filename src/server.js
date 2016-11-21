@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
         `
         </div>
         <script>var _id = ` + id.toString() + `</script>
-        <script src="/static/client.js"></script>
+        <script src="/static/build/client.js"></script>
       </body>
   `)
   id++;
