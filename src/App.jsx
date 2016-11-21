@@ -44,6 +44,7 @@ export default class App extends React.Component {
           return (<Message
             text={reply}
             key={index+this.state.dialogueEntries.length}
+            isBot
           />);
         });
 

@@ -2,7 +2,9 @@ import React from 'react';
 
 export default class Message extends React.Component {
   render() {
-    return (<div style={{background: "red"}}>
+    const style = {};
+    style.background = this.props.isBot ? "green" : "red";
+    return (<div style={style}>
       {this.props.text}
     </div>);
   }
