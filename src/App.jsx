@@ -16,6 +16,7 @@ export default class App extends React.Component {
   sendMessage(e) {
     e.preventDefault();
     const message = e.target.message.value;
+    e.target.message.value = "";
     if (!message) {
       return;
     }
