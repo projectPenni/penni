@@ -1,0 +1,19 @@
+{
+  "name": "penni",
+  "version": "1.0.0",
+  "description": "A chatbot to enhance accessibility and customer service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projectPenni/penni.git"
+  },
+  "author": "Emil Goldsmith Olesen, William Held, Brooke Hopkins, Megan Moore and Zane Mountcastle",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/projectPenni/penni/issues"
+  },
+  "homepage": "https://github.com/projectPenni/penni#readme"
+}
