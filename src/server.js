@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
     <html>
       <head>
         <title>Penni</title>
+        <link rel="stylesheet" type="text/css" href="/static/build/main.css">
       </head>
       <body>
         <div id='main'>
