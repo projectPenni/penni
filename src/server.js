@@ -83,6 +83,7 @@ app.use('/static', express.static('static'));
 app.get('/', (req, res) => {
   res.status(200).send(`
     <!DOCTYPE html>
+    <meta name="viewport" content="width=1000; user-scalable=0;" />
     <html>
       <head>
         <title>Penni</title>
