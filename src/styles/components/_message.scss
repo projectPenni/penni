@@ -1,3 +1,11 @@
 .message {
-  background: gray;
+  margin: 0.5rem;
+  &__from-user {
+    width: auto;
+    text-align: right;
+    background: rgb(0, 180, 160);
+  }
+  &__from-penni {
+
+  }
 }
