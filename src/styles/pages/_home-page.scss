@@ -1,6 +1,5 @@
 .home-page {
-  max-width: 50%;
-  min-width: 300px;
+  width: 50%;
   margin: 0 auto;
   height: 97vh;
 
@@ -33,7 +32,7 @@
     form {
       margin-left: 0.5rem;
       margin-right: 0.5rem;
-      font-size: 1rem;
+      font-size: 4vmin;
       color: #323232;
       max-width: 100%;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -46,7 +45,6 @@
     }
   }
 }
-
 .canvas-basic {
   position: absolute;
   display: block;
@@ -62,7 +60,7 @@
 .welcome-message {
   position: absolute;
   display: block;
-  max-width: 500px;
+  max-width: 100%;
   top: 35%;
   bottom: 45%;
   margin-left: auto;
@@ -71,6 +69,6 @@
   right: 0;
   padding: 10px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 5vmin;
   color: #808080;
 }
