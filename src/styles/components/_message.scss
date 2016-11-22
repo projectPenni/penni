@@ -25,4 +25,13 @@
     z-index: 1;
     right: -28px;
     top: 68px;
+  margin: 0.5rem;
+  &__from-user {
+    width: auto;
+    text-align: right;
+    background: rgb(0, 180, 160);
+  }
+  &__from-penni {
+
+  }
 }

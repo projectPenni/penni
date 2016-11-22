@@ -2,9 +2,13 @@
   max-width: 50%;
   min-width: 300px;
   margin: 0 auto;
+  height: 100vh;
 
   .scrolling-chat {
-
+    margin: 0.75rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 4rem);
   }
   .input-wrapper{
       position: relative;
@@ -22,19 +26,19 @@
     display: block;
     width: 100%;
     border-bottom: 0.0625rem solid #aeaeae;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 1rem;
-    color: #323232;
-    letter-spacing: 0.015rem;
-    line-height: 1.3125rem;
-    height: 2.5rem;
-    max-width: 100%;
-    padding-left: 0.125rem;
-    margin-bottom: -0.125rem;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    form {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      background: transparent;
+      font-size: 1rem;
+      color: #323232;
+      max-width: 100%;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+      }
+    }
   }
 }
