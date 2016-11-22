@@ -14,8 +14,13 @@ export default class App extends React.Component {
       loading: false,
       lastActive: new Date().getTime(),
       active: false,
+      recording: false,
+      micReady: false,
     };
     this.sendMessage = this.sendMessage.bind(this);
+    this.toggleRecord = this.toggleRecord.bind(this);
+    this.translateAudio = this.translateAudio.bind(this);
+    this.appendMessage = this.appendMessage.bind(this);
   }
 
   componentDidMount() {
@@ -42,10 +47,16 @@ export default class App extends React.Component {
     });
   }
 
-  sendMessage(e) {
-    e.preventDefault();
-    const message = e.target.message.value;
-    e.target.message.value = "";
+  sendMessage(e, talk, path) {
+    let message;
+    if ((typeof e) === "string") {
+      message = e;
+    }
+    else {
+      e.preventDefault();
+      message = e.target.message.value;
+      e.target.message.value = "";
+    }
     if (!message) {
       return;
     }
@@ -69,8 +80,10 @@ export default class App extends React.Component {
       })
 
       res.on('end', () => {
+        if (talk) {
+          this.speak(replies, path);
+        }
         replies = replies.split('SPLITPOINT');
-
         replies = replies.map((reply, index) => {
           return (<Message
             text={reply}
@@ -88,6 +101,105 @@ export default class App extends React.Component {
     });
   }
 
+  speak(replies, path) {
+    http.get({
+      host: "localhost",
+      port: 3000,
+      path: "/speak?message="+replies+"&path="+path,
+    }, (res) => {
+      let path = '';
+      res.on('data', (chunk) => {
+        path += chunk;
+      });
+
+      res.on('end', () => {
+        const player = new Audio();
+        player.src = path;
+        player.play();
+      })
+    })
+  }
+
+  toggleRecord() {
+    if (!this.state.recording) {
+      if (!this.state.micReady) {
+        if (window.Recorder) {
+          navigator.getUserMedia({'audio': true}, (stream) => {
+            const context = new AudioContext();
+            const mic = context.createMediaStreamSource(stream);
+
+            console.log(window.Recorder);
+
+            this.recorder = new Recorder(mic, {
+              workerPath: 'bower_components/Recorderjs/recorderWorker.js',
+              callback: this.translateAudio.bind(this, this),
+            });
+            this.recorder.record();
+            this.setState({
+              micReady: true,
+              recording: true,
+            });
+          }, (err) => {console.log(err)})
+        }
+        else {
+          window.alert("Not ready yet");
+          return;
+        }
+      }
+      else {
+        this.recorder.record();
+        this.setState({
+          recording: true,
+        })
+      }
+    }
+    else {
+      // Already recording
+      this.recorder.stop();
+      this.recorder.exportWAV();
+      this.recorder.clear();
+      this.setState({recording: false});
+    }
+  }
+
+  translateAudio(that, blob) {
+    var url = URL.createObjectURL(blob),
+        request = new XMLHttpRequest();
+
+    request.open('GET', url, true);
+    request.responseType = 'blob';
+    request.onload = function () {
+      var formData = new FormData(),
+          xhr = new XMLHttpRequest(),
+          blob,
+          player;
+
+      formData.append('audio', this.response);
+
+      xhr.open('POST', 'translate', true);
+      xhr.responseType = 'json';
+      xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+
+      xhr.onload = function () {
+        const message = xhr.response.text;
+        that.sendMessage(message, true, xhr.response.path);
+      }
+
+      xhr.send(formData);
+    }
+    request.send();
+  }
+
+  appendMessage(message, isBot) {
+    this.setState({
+      dialogueEntries: this.state.dialogueEntries.concat([(<Message
+        text={message}
+        key={this.state.dialogueEntries.length}
+        isBot={isBot}
+      />)]),
+    });
+  }
+
   render() {
     return (
       <div>
@@ -99,6 +211,11 @@ export default class App extends React.Component {
           this.state.loading ? <Loading />
           : null
         }
+        <button
+          style={{width: "200px", height: "200px", background: "purple"}}
+          onClick={this.toggleRecord}
+        >Toggle record</button>
+        {this.state.recording ? "Recording..." : null}
       </div>
     );
   }
