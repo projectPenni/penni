@@ -259,7 +259,7 @@ export default class App extends React.Component {
             </form>
           </div>
           <div className="microphone">
-            <input type='button' onClick={this.toggleRecord} name='microphone' value='' className={mic}/>
+            <input type='button' onClick={this.toggleRecord} name='microphone' alt="Toggle microphone" value='Toggle Microphone' className={mic} />
           </div>
         </div>
       </div>

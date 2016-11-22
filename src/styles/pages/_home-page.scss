@@ -58,6 +58,8 @@
         height: 50px;           /* make this the size of your image */
         padding-left: 50px;     /* make text start to the right of the image */
         vertical-align: middle; /* align the text vertically centered */
+        color: transparent;
+        font-size: 0.0000000000000001rem;
       }
       .microphone-on {
         background-image: url(/static/microphone-on.svg); /* 16px x 16px */
