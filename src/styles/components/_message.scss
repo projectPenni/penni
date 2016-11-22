@@ -1,29 +1,37 @@
 .message {
   padding-right:15px;
   padding-left: 15px;
+  /*padding-top: .1rem;
+  padding-bottom: .1rem;*/
+
 
     &__from-user {
-      background: #D1D3D1;
+      background: #99BDD7;
       text-align: right;
       font-size: .7rem;
-      margin-left: auto;
+      right: 0;
+      left: auto;
       position: relative;
-      width: 50%;
-      height: auto;
       padding: 5px;
-      border-radius: 28px;
-
+      border-radius: 12px;
+      word-wrap: break-word;
+      direction: rtl;
+      float: right;
+      display:inline-block;
     }
     &__from-penni {
-      background: #F2EADB;
+      background: #DDCED8;
       text-align: left;
       font-size: .7rem;
-      margin-right: auto;
+      left: 0;
+      right: auto;
       position: relative;
-      width: 50%;
-      height: auto;
       padding: 5px;
-      border-radius: 28px;
+      border-radius: 12px;
+      word-wrap: break-word;
+      direction: ltr;
+      float: left;
+      display:inline-block;
     }
 }
 
@@ -33,13 +41,14 @@
     content: '';
     border-style: solid;
     border-width: 5px 0 5px 18px;
-    border-color: transparent #D1D3D1;
-    display: block;
+    border-color: transparent #99BDD7;
     width: 0;
     z-index: -1;
     right: -10px;
     top: 76%;
     margin-top: -5px;
+    display: inline-block;
+
 
 }
 .message__from-penni:after
@@ -48,12 +57,16 @@
     content: '';
     border-style: solid;
     border-width: 5px 18px 5px 0;
-    border-color: transparent #F2EADB;
-    display: block;
+    border-color: transparent #DDCED8;
     width: 0;
     z-index: -1;
     left: -10px;
     top: 76%;
     margin-top: -5px;
+    display: inline-block;
 
+}
+.space{
+  width:100%;
+  display: inline-block;
 }
