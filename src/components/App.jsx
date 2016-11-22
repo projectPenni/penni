@@ -230,7 +230,7 @@ export default class App extends React.Component {
       if ( this.state.dialogueEntries.length <= 0 ){
         return(
           <p className="welcome-message">
-            Hey there! I'm Penni, your inflight personal assistant.
+            Hey there! I'm Penni, your personal travel assistant.
             Just type in the text box below or click the microphone and speak
             normally. Make sure to click the microphone again when you are done
             speaking.

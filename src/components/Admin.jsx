@@ -1,5 +1,6 @@
 import React from 'react';
 import http from 'http';
+import Granim from 'granim';
 
 export default class Admin extends React.Component {
   constructor() {
@@ -31,16 +32,40 @@ export default class Admin extends React.Component {
         });
       });
     }, 10*1000);
+
+    var granimInstance = new Granim({
+      element: '.canvas-basic',
+      name: 'basic-gradient',
+      direction: 'left-right',
+      opacity: [1, 1],
+      isPausedWhenNotInView: true,
+      stateTransitionSpeed: 2000,
+      states : {
+          "default-state": {
+              gradients: [
+                  ['#f8edd1', '#ede1cc'],
+                  ['#d1dfe7', '#cdebed'],
+              ]
+          }
+      }
+    });
   }
 
+// {req.intents[0].intent}<br/>
   render() {
     const requests = this.state.requests.map((req) => {
-      return (<div key={req.message}>
-        {req.intents[0].intent}<br/>
-        {req.entities[0].entity}<br/>
-        {req.message}<br/>
-      </div>);
+      return (
+        <div key={req.message} className="admin">
+          <p className={req.intents[0].intent}>{req.message}</p>
+        </div>
+      );
     });
-    return <div>{requests}</div>;
+    return (
+      <div>
+        <h1 className="title">Penni Admin Panel</h1>
+        <canvas className="canvas-basic"></canvas>
+        {requests}
+      </div>
+    );
   }
 }

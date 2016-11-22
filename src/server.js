@@ -1,5 +1,6 @@
 import express from 'express';
 import App from 'components/App';
+import Admin from 'components/Admin';
 import ReactDomServer from 'react-dom/server';
 import React from 'react';
 import ConversationV1 from 'watson-developer-cloud/conversation/v1';
@@ -108,6 +109,7 @@ app.get('/admin', (req, res) => {
     <html>
       <head>
         <title>Admin page</title>
+        <link rel="stylesheet" type="text/css" href="/static/build/main.css">
       </head>
       <body>
         <div id='main'>
