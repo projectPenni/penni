@@ -2,11 +2,11 @@
 
 let config = {
   login: {
-    username: 'name',
-    password: 'password',
+    username: 'c01a5691-dbb6-42bc-92e5-69a14fc04854',
+    password: 'F3u7BQNQMOU7',
     version_date: '2016-09-20', // The newest version as of 21st of November 2016
   },
-  workspace_id: '0ad29cc1-a640-46da-9807-2d9afd25e1e6',
+  workspace_id: 'b8f2d6ce-e3fd-4597-b084-beb525ac55e5',
 };
 
 module.exports = config;
