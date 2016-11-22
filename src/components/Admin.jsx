@@ -31,7 +31,7 @@ export default class Admin extends React.Component {
           });
         });
       });
-    }, 10*1000);
+    }, 5*1000);
 
     var granimInstance = new Granim({
       element: '.canvas-basic',
