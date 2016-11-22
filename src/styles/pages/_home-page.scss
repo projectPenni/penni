@@ -15,7 +15,17 @@
     overflow-x: hidden;
     height: calc(100% - 4rem);
   }
+  .input-wrapper{
+      position: relative;
+      background-color: blue;
+      height: auto;
+  }
 
+  .input-test{
+      position: absolute;
+      bottom: 5px;
+      background-color: green
+  }
   .input {
     display: block;
     width: 100%;
