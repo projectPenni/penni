@@ -88,6 +88,12 @@ app.get('/message', (req, res) => {
       }
     });
   }
+});
+
+app.get('/clearDialogue', (req, res) => {
+  const _id = req.query._id;
+  dialogueContexts[_id] = undefined;
+  dialogueResponses[_id] = undefined;
 })
 
 app.get('*', (req, res) => {
