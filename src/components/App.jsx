@@ -2,6 +2,9 @@ import React from 'react';
 import http from 'http';
 import Message from './Message';
 import Loading from './Loading';
+import Granim from 'granim';
+
+import "styles/main.scss";
 
 const TIMEOUT_CONSTANT = 30*1000;
 const GOODBYE_TEXT = "See you later!";
@@ -29,7 +32,29 @@ export default class App extends React.Component {
       if (timeTaken > TIMEOUT_CONSTANT && this.state.active) {
         this.goodbye();
       }
-    }, 5*1000)
+    }, 5*1000);
+
+    var granimInstance = new Granim({
+      element: '.canvas-basic',
+      name: 'basic-gradient',
+      direction: 'left-right',
+      opacity: [1, 1],
+      isPausedWhenNotInView: true,
+      stateTransitionSpeed: 2000,
+      states : {
+          "default-state": {
+              gradients: [
+                  ['#f8edd1', '#ede1cc'],
+                  ['#d1dfe7', '#cdebed'],
+              ]
+          }
+      }
+    });
+  }
+
+  // Maintain scroll at bottom of chat
+  componentDidUpdate() {
+    document.getElementsByClassName("scrolling-chat")[0].scrollTop = document.getElementsByClassName("scrolling-chat")[0].scrollHeight;
   }
 
   goodbye() {
@@ -201,21 +226,37 @@ export default class App extends React.Component {
   }
 
   render() {
+    let renderWelcome = () => {
+      if ( this.state.dialogueEntries.length <= 0 ){
+        return(
+          <p className="welcome-message">
+            Hey there! I'm Penni, your inflight personal assistant.
+            Just type in the text box below or speak into your microphone.
+          </p>
+        );
+      }
+    }
     return (
-      <div>
-        <form onSubmit={this.sendMessage}>
-          <input type='text' name='message' />
-        </form>
-        {this.state.dialogueEntries}
+      <div className="home-page">
+        <canvas className="canvas-basic"></canvas>
+        <div className="scrolling-chat">
+          {this.state.dialogueEntries}
         {
           this.state.loading ? <Loading />
           : null
         }
-        <button
-          style={{width: "200px", height: "200px", background: "purple"}}
-          onClick={this.toggleRecord}
-        >Toggle record</button>
-        {this.state.recording ? "Recording..." : null}
+        </div>
+        <div>
+          { renderWelcome() }
+        </div>
+        <div className="input">
+          <form onSubmit={this.sendMessage}>
+            <input type='text' name='message' placeholder="How can I help you?" autoFocus/>
+          </form>
+        </div>
+        <div className="microphone">
+          <input type='button' onClick={this.toggleRecord} name='microphone' value='microphone' />
+        </div>
       </div>
     );
   }

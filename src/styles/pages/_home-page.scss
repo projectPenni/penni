@@ -1,0 +1,76 @@
+.home-page {
+  max-width: 50%;
+  min-width: 300px;
+  margin: 0 auto;
+  height: 97vh;
+
+  ::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
+
+  .scrolling-chat {
+    margin: 0.75rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 4rem);
+  }
+  .input-wrapper{
+      position: relative;
+      background-color: blue;
+      height: auto;
+  }
+
+  .input-test{
+      position: absolute;
+      bottom: 5px;
+      background-color: green
+  }
+  .input {
+    display: block;
+    width: 100%;
+    border-bottom: 0.0625rem solid #aeaeae;
+    form {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+      color: #323232;
+      max-width: 100%;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      input {
+        border: none;
+        background: transparent;
+        outline: none;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.canvas-basic {
+  position: absolute;
+  display: block;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.welcome-message {
+  position: absolute;
+  display: block;
+  max-width: 500px;
+  top: 35%;
+  bottom: 45%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #808080;
+}

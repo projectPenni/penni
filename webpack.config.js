@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
-
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var cssnext = require('postcss-cssnext');
 
 module.exports = [{
   target: 'node',
@@ -18,17 +19,35 @@ module.exports = [{
     ],
     extensions: ['', '.js', '.jsx'],
   },
-  plugins: [new webpack.OldWatchingPlugin()],
+  plugins: [
+    new webpack.OldWatchingPlugin(),
+    new ExtractTextPlugin('./static/build/main.css', {
+      allChunks: true,
+    }),
+  ],
   module: {
-    loaders: [{
-      loader: 'babel-loader',
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react'],
+    loaders: [
+      {
+        loader: 'babel-loader',
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'],
+        },
       },
-    }],
-  }
+
+      /*
+       * Parse SCSS to minified CSS, then postprocess with postcss autoprefixer plugin
+       */
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', ['css?minimize', 'postcss', 'sass']),
+      },
+    ],
+  },
+  postcss: function () {
+    return [cssnext];
+  },
 },
 {
   target: 'web',
@@ -44,16 +63,24 @@ module.exports = [{
     ],
     extensions: ['', '.js', '.jsx'],
   },
-  plugins: [new webpack.OldWatchingPlugin()],
+  plugins: [
+    new webpack.OldWatchingPlugin()
+  ],
   module: {
-    loaders: [{
-      loader: 'babel',
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react'],
+    loaders: [
+      {
+        loader: 'babel',
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'],
+        },
       },
-    }],
+      {
+        test: /\.scss$/,
+        loader: "null",
+      },
+    ],
   }
 },
 {

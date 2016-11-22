@@ -2,10 +2,13 @@ import React from 'react';
 
 export default class Message extends React.Component {
   render() {
-    const style = {};
-    style.background = this.props.isBot ? "brown" : "gold";
-    return (<div style={style}>
-      {this.props.text}
-    </div>);
+    var classVal = this.props.isBot ? "message__from-penni" : "message__from-user";
+    return (
+      <div className="message">
+        <div className={classVal} >
+          {this.props.text}
+        </div>
+      </div>
+    );
   }
 }
