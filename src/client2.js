@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'components/App';
+import Admin from 'components/Admin';
 
 ReactDOM.render(
-  <App _id={_id} />,
+  <Admin requests={requests}/>,
   document.getElementById('main'));

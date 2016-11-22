@@ -3,19 +3,19 @@
 var watson = require('watson-developer-cloud'),
     credentials = {};
 
-credentials = require('../config.js').speech_to_text.login;
+credentials = require('../../config.js').text_to_speech.login;
 
 module.exports = function (params, cb) {
-  var speechToText;
+  var textToSpeech;
 
   if (credentials) {
-    speechToText = watson.speech_to_text({
+    textToSpeech = watson.text_to_speech({
       'username': credentials.username,
       'password': credentials.password,
       'url': credentials.url,
       version: 'v1',
     });
 
-    speechToText.recognize(params, cb);
+    textToSpeech.synthesize(params, cb);
   }
 }

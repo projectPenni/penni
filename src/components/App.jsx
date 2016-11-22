@@ -1,7 +1,7 @@
 import React from 'react';
 import http from 'http';
-import Message from 'Message';
-import Loading from 'Loading';
+import Message from './Message';
+import Loading from './Loading';
 
 const TIMEOUT_CONSTANT = 30*1000;
 const GOODBYE_TEXT = "See you later!";
@@ -47,7 +47,7 @@ export default class App extends React.Component {
     });
   }
 
-  sendMessage(e, talk, path) {
+  sendMessage(e, garbage, talk, path) {
     let message;
     if ((typeof e) === "string") {
       message = e;
@@ -182,7 +182,7 @@ export default class App extends React.Component {
 
       xhr.onload = function () {
         const message = xhr.response.text;
-        that.sendMessage(message, true, xhr.response.path);
+        that.sendMessage(message, undefined, true, xhr.response.path);
       }
 
       xhr.send(formData);

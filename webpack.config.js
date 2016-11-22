@@ -56,4 +56,30 @@ module.exports = [{
     }],
   }
 },
+{
+  target: 'web',
+  entry: './src/client2.js',
+  output: {
+    filename: "./static/build/client2.js",
+  },
+  resolve: {
+    root: __dirname,
+    modulesDirectories: [
+      'node_modules',
+      './src',
+    ],
+    extensions: ['', '.js', '.jsx'],
+  },
+  plugins: [new webpack.OldWatchingPlugin()],
+  module: {
+    loaders: [{
+      loader: 'babel',
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      query: {
+        presets: ['es2015', 'react'],
+      },
+    }],
+  }
+},
 ]
