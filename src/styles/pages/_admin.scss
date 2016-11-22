@@ -2,8 +2,20 @@
   margin: 0 auto;
   max-width: 40%;
   min-width: 250px;
-  background-color: green;
-  p.emergency {
-    background-color: red;
+  border-radius: 3px;
+  display: flex;
+  p {
+    background-color: #D4FFD4;
+    padding: 2rem;
   }
+  .emergency {
+    background-color: #FFD4D4;
+  }
+}
+
+h1.title {
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 2rem;
+  color: #808080;
 }
