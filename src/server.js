@@ -4,6 +4,7 @@ import ReactDomServer from 'react-dom/server';
 import React from 'react';
 import ConversationV1 from 'watson-developer-cloud/conversation/v1';
 import config from '../config';
+import _ from 'lodash';
 
 const app = express();
 
@@ -11,6 +12,9 @@ const conversation = new ConversationV1(config.login);
 let id = 1;
 
 const dialogueContexts = {};
+const dialogueResponses = {};
+
+const TIMEOUT_CONSTANT = 10*1000;
 
 app.use('/static', express.static('static'));
 
@@ -45,8 +49,12 @@ app.get('/message', (req, res) => {
   }
   else {
     let context = undefined;
+    let lastResponse = undefined;
     if (dialogueContexts.hasOwnProperty(_id)) {
       context = dialogueContexts[_id];
+    }
+    if (dialogueResponses.hasOwnProperty(_id)) {
+      lastResponse = dialogueResponses[_id];
     }
     conversation.message({
       input: {text: message},
@@ -58,17 +66,34 @@ app.get('/message', (req, res) => {
         res.status(500).send("Sorry, we encountered an error");
       }
       else {
+        const data = {entities: response.entities, intents: response.intents};
         if (response.output.text.length === 0) {
           res.status(200).send("I don't know what to say...");
+        }
+        else if (_.isEqual(lastResponse, data)) {
+          res.status(200).send("But... you already said that? :(");
         }
         else {
           const reply = response.output.text.join('SPLITPOINT');
           res.status(200).send(reply);
         }
         dialogueContexts[_id] = response.context;
+        dialogueResponses[_id] = data;
+
+        setTimeout(((data, id) => {
+          if (data === dialogueResponses[id]) {
+            dialogueResponses[id] = undefined;
+          }
+        }).bind(null, data, _id), TIMEOUT_CONSTANT);
       }
     });
   }
+});
+
+app.get('/clearDialogue', (req, res) => {
+  const _id = req.query._id;
+  dialogueContexts[_id] = undefined;
+  dialogueResponses[_id] = undefined;
 })
 
 app.get('*', (req, res) => {
