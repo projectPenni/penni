@@ -1,5 +1,5 @@
 import express from 'express';
-import App from 'App';
+import App from 'components/App';
 import ReactDomServer from 'react-dom/server';
 import React from 'react';
 import ConversationV1 from 'watson-developer-cloud/conversation/v1';
@@ -7,8 +7,8 @@ import config from '../config';
 import _ from 'lodash';
 import formidable from 'formidable';
 import fs from 'fs-extra';
-import STT from 'speech-to-text';
-import TTS from 'text-to-speech';
+import STT from 'lib/speech-to-text';
+import TTS from 'lib/text-to-speech';
 
 function getConversationReply(message, _id) {
   return new Promise((resolve, reject) => {
@@ -30,6 +30,16 @@ function getConversationReply(message, _id) {
         resolve("Sorry, we encountered an error");
       }
       else {
+        if (response.context.actionNeeded) {
+          if (response.intents[0].intent === "emergency") {
+            requests.unshift({intents: response.intents, entities: response.entities, message: response.input.text});
+          }
+          else {
+            requests.push({intents: response.intents, entities: response.entities, message: response.input.text});
+          }
+          delete response.context.actionNeeded;
+          console.log(requests);
+        }
         const data = {entities: response.entities, intents: response.intents};
         if (response.output.text.length === 0) {
           resolve("I don't know what to say...");
@@ -66,6 +76,8 @@ const TIMEOUT_CONSTANT = 10*1000;
 
 let fileName = 1;
 
+const requests = [];
+
 app.use('/static', express.static('static'));
 
 app.get('/', (req, res) => {
@@ -85,9 +97,28 @@ app.get('/', (req, res) => {
         <script src="/static/build/client.js"></script>
         <script src="/static/bower_components/Recorderjs/recorder.js"></script>
       </body>
-  `)
+  `);
   id++;
 });
+
+app.get('/admin', (req, res) => {
+  res.status(200).send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Admin page</title>
+      </head>
+      <body>
+        <div id='main'>
+        `
+          + 'loading...' +
+        `
+        </div>
+        <script>var requests = ` + JSON.stringify(requests) + `;</script>
+        <script src="/static/build/client2.js"></script>
+      </body>
+  `);
+})
 
 app.get('/message', (req, res) => {
   const message = req.query.message;
