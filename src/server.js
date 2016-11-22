@@ -9,6 +9,7 @@ import formidable from 'formidable';
 import fs from 'fs-extra';
 import STT from 'lib/speech-to-text';
 import TTS from 'lib/text-to-speech';
+import gen from 'random-seed';
 
 function getConversationReply(message, _id) {
   return new Promise((resolve, reject) => {
@@ -31,11 +32,17 @@ function getConversationReply(message, _id) {
       }
       else {
         if (response.context.actionNeeded) {
+          let seat = "";
+          const rand = new gen(_id);
+          seat += rand.intBetween(5, 60).toString();
+          const a = 'A'.charCodeAt(0);
+          seat += String.fromCharCode(a+rand(6));
+
           if (response.intents[0].intent === "emergency") {
-            requests.unshift({intents: response.intents, entities: response.entities, message: response.input.text});
+            requests.unshift({intents: response.intents, entities: response.entities, message: response.input.text, seat: seat});
           }
           else {
-            requests.push({intents: response.intents, entities: response.entities, message: response.input.text});
+            requests.push({intents: response.intents, entities: response.entities, message: response.input.text, seat: seat});
           }
           delete response.context.actionNeeded;
           console.log(requests);
