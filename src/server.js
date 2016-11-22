@@ -91,10 +91,10 @@ app.use('/static', express.static('static'));
 app.get('/', (req, res) => {
   res.status(200).send(`
     <!DOCTYPE html>
-    <meta name="viewport" content="width=1000; user-scalable=0;" />
     <html>
       <head>
         <title>Penni</title>
+        <meta name="viewport" content="width=1000; user-scalable=0;" />
         <link rel="stylesheet" type="text/css" href="/static/build/main.css">
       </head>
       <body>
@@ -117,6 +117,7 @@ app.get('/admin', (req, res) => {
     <html>
       <head>
         <title>Admin page</title>
+        <meta name="viewport" content="width=1000; user-scalable=0;" />
         <link rel="stylesheet" type="text/css" href="/static/build/main.css">
       </head>
       <body>
