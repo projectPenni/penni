@@ -6,8 +6,19 @@
   .scrolling-chat {
 
   }
+  .input-wrapper{
+      position: relative;
+      background-color: blue;
+      height: auto;
+  }
 
+  .input-test{
+      position: absolute;
+      bottom: 5px;
+      background-color: green
+  }
   .input {
+      background-color: blue;
     display: block;
     width: 100%;
     border-bottom: 0.0625rem solid #aeaeae;

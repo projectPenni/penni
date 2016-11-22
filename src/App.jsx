@@ -49,6 +49,7 @@ export default class App extends React.Component {
             <Message
               text={reply}
               key={index+this.state.dialogueEntries.length}
+              isBot
             />
           );
         });
@@ -64,6 +65,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="home-page">
+
         <div className="scrolling-chat">
           {this.state.dialogueEntries}
         </div>
@@ -71,9 +73,13 @@ export default class App extends React.Component {
           this.state.loading ? <Loading />
           : null
         }
-        <form onSubmit={this.sendMessage} className="input">
-          <input type='text' name='message' />
-        </form>
+        <div className="input-wrapper">
+            <form onSubmit={this.sendMessage} className="input">
+              <input type='text' name='message' />
+            </form>
+
+        </div>
+
       </div>
     );
   }
