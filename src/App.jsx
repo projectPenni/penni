@@ -65,18 +65,17 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="home-page">
+          <div className="scrolling-chat">
+            {this.state.dialogueEntries}
+          {
+            this.state.loading ? <Loading />
+            : null
+          }
 
-        <div className="scrolling-chat">
-          {this.state.dialogueEntries}
-        {
-          this.state.loading ? <Loading />
-          : null
-        }
-
-        </div>
+          </div>
         <div className="input">
           <form onSubmit={this.sendMessage}>
-            <input type='text' name='message' placeholder="How can I help you?"/>
+            <input type='text' name='message' placeholder="Example: May I have water"/>
           </form>
         </div>
       </div>

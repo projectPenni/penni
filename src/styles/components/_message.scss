@@ -1,37 +1,59 @@
 .message {
-    font-size: 1.2rem;
-    margin: 1rem;
-    position: relative;
-    width: 315px;
-    height: auto;;
-    padding: 0px;
-    background: #C4921B;
-    -webkit-border-radius: 28px;
-    -moz-border-radius: 28px;
-    border-radius: 28px;
+  padding-right:15px;
+  padding-left: 15px;
 
+    &__from-user {
+      background: #D1D3D1;
+      text-align: right;
+      font-size: .7rem;
+      margin-left: auto;
+      position: relative;
+      width: 50%;
+      height: auto;
+      padding: 5px;
+      border-radius: 28px;
 
+    }
+    &__from-penni {
+      background: #F2EADB;
+      text-align: left;
+      font-size: .7rem;
+      margin-right: auto;
+      position: relative;
+      width: 50%;
+      height: auto;
+      padding: 5px;
+      border-radius: 28px;
+    }
 }
 
-.message:after
+.message__from-user:after
 {
+    position: absolute;
     content: '';
-
     border-style: solid;
-    border-width: 13px 0 13px 28px;
-    border-color: transparent #C4921B;
+    border-width: 5px 0 5px 18px;
+    border-color: transparent #D1D3D1;
     display: block;
     width: 0;
-    z-index: 1;
-    right: -28px;
-    top: 68px;
-  margin: 0.5rem;
-  &__from-user {
-    width: auto;
-    text-align: right;
-    background: rgb(0, 180, 160);
-  }
-  &__from-penni {
+    z-index: -1;
+    right: -10px;
+    top: 76%;
+    margin-top: -5px;
 
-  }
+}
+.message__from-penni:after
+{
+    position: absolute;
+    content: '';
+    border-style: solid;
+    border-width: 5px 18px 5px 0;
+    border-color: transparent #F2EADB;
+    display: block;
+    width: 0;
+    z-index: -1;
+    left: -10px;
+    top: 76%;
+    margin-top: -5px;
+
 }
