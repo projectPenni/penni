@@ -1,0 +1,8 @@
+%base--blockquote {
+  padding: 0em 1.5em;
+  margin-right: 1em;
+  margin-left: 1em;
+  font-style: italic;
+  color: color('grayscale', 80);
+  border-left: .25em solid setting-get('secondary accent color');
+}

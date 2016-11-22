@@ -3,5 +3,4 @@ build
 static/build
 *.log
 tmp/
-static/bower_components
 static/responses

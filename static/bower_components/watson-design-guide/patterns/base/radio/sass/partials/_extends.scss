@@ -1,0 +1,23 @@
+%base--radio {
+  display: none;
+
+  + label {
+    position: relative;
+
+    &:before {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-right: setting-get('rhythm') / 2;
+      vertical-align: middle;
+      border: setting-get('input border width') solid color('gray', 30);
+      border-radius: 50%;
+      content: '';
+      transform: translateY(-.125em);
+    }
+  }
+
+  &:checked + label:before {
+    background: radial-gradient(color('grayscale', 90) 40%, transparent 40%);
+  }
+}
