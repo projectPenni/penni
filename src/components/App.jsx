@@ -231,11 +231,14 @@ export default class App extends React.Component {
         return(
           <p className="welcome-message">
             Hey there! I'm Penni, your inflight personal assistant.
-            Just type in the text box below or speak into your microphone.
+            Just type in the text box below or click the microphone and speak
+            normally. Make sure to click the microphone again when you are done
+            speaking.
           </p>
         );
       }
     }
+    let mic = this.state.recording ? "microphone-on" : "microphone-off"
     return (
       <div className="home-page">
         <canvas className="canvas-basic"></canvas>
@@ -249,13 +252,15 @@ export default class App extends React.Component {
         <div>
           { renderWelcome() }
         </div>
-        <div className="input">
-          <form onSubmit={this.sendMessage}>
-            <input type='text' name='message' placeholder="How can I help you?" autoFocus/>
-          </form>
-        </div>
-        <div className="microphone">
-          <input type='button' onClick={this.toggleRecord} name='microphone' value='microphone' />
+        <div className="submits">
+          <div className="input">
+            <form onSubmit={this.sendMessage}>
+              <input type='text' name='message' placeholder="How can I help you?" autoFocus/>
+            </form>
+          </div>
+          <div className="microphone">
+            <input type='button' onClick={this.toggleRecord} name='microphone' value='' className={mic}/>
+          </div>
         </div>
       </div>
     );

@@ -2,7 +2,7 @@
   max-width: 50%;
   min-width: 300px;
   margin: 0 auto;
-  height: 97vh;
+  height: 95vh;
 
   ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
@@ -26,25 +26,49 @@
       bottom: 5px;
       background-color: green
   }
-  .input {
-    display: block;
-    width: 100%;
-    border-bottom: 0.0625rem solid #aeaeae;
-    form {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-      font-size: 1rem;
-      color: #323232;
-      max-width: 100%;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  .submits {
+    display: flex;
+    align-items: center;
+    .input {
+      display: block;
+      width: 100%;
+      border-bottom: 0.0625rem solid #aeaeae;
+      form {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-size: 1rem;
+        color: #323232;
+        max-width: 100%;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        input {
+          border: none;
+          background: transparent;
+          outline: none;
+          width: 100%;
+        }
+      }
+    }
+    .microphone {
       input {
-        border: none;
-        background: transparent;
         outline: none;
-        width: 100%;
+        background-color: transparent; /* make the button transparent */
+        background-repeat: no-repeat;  /* make the background image appear only once */
+        background-position: 0px 0px;  /* equivalent to 'top left' */
+        border: none;           /* assuming we don't want any borders */
+        cursor: pointer;        /* make the cursor like hovering over an <a> element */
+        height: 50px;           /* make this the size of your image */
+        padding-left: 50px;     /* make text start to the right of the image */
+        vertical-align: middle; /* align the text vertically centered */
+      }
+      .microphone-on {
+        background-image: url(/static/microphone-on.svg); /* 16px x 16px */
+      }
+      .microphone-off {
+        background-image: url(/static/microphone-off.svg); /* 16px x 16px */
       }
     }
   }
+
 }
 
 .canvas-basic {
