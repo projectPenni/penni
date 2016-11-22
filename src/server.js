@@ -228,6 +228,10 @@ app.get('/speak', (req, res) => {
       res.send('/' + path);
     }
   });
+});
+
+app.get('/refreshAdmin', (req, res) => {
+  res.status(200).send(JSON.stringify(requests));
 })
 
 app.get('*', (req, res) => {
