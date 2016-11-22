@@ -42,10 +42,10 @@ function getConversationReply(message, _id) {
         }
         const data = {entities: response.entities, intents: response.intents};
         if (response.output.text.length === 0) {
-          resolve("I don't know what to say...");
+          resolve("I don't know what to say. Could you please rephrase that?");
         }
         else if (_.isEqual(lastResponse, data)) {
-          resolve("But... you already said that? :(");
+          resolve("But... you already said that?");
         }
         else {
           const reply = response.output.text.join('SPLITPOINT');
@@ -228,6 +228,10 @@ app.get('/speak', (req, res) => {
       res.send('/' + path);
     }
   });
+});
+
+app.get('/refreshAdmin', (req, res) => {
+  res.status(200).send(JSON.stringify(requests));
 })
 
 app.get('*', (req, res) => {

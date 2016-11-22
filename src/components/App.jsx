@@ -255,7 +255,7 @@ export default class App extends React.Component {
         <div className="submits">
           <div className="input">
             <form onSubmit={this.sendMessage}>
-              <input type='text' name='message' placeholder="How can I help you?" autoFocus/>
+              <input type='text' name='message' placeholder="How can I help you?" autoComplete="off" autoFocus/>
             </form>
           </div>
           <div className="microphone">
