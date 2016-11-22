@@ -23,10 +23,12 @@ export default class App extends React.Component {
       return;
     }
     this.setState({
-      dialogueEntries: this.state.dialogueEntries.concat([(<Message
-        text={message}
-        key={this.state.dialogueEntries.length}
-      />)]),
+      dialogueEntries: this.state.dialogueEntries.concat([(
+        <Message
+          text={message}
+          key={this.state.dialogueEntries.length}
+        />
+      )]),
       loading: true,
     });
     http.get({
@@ -43,10 +45,12 @@ export default class App extends React.Component {
         replies = replies.split('SPLITPOINT');
 
         replies = replies.map((reply, index) => {
-          return (<Message
-            text={reply}
-            key={index+this.state.dialogueEntries.length}
-          />);
+          return (
+            <Message
+              text={reply}
+              key={index+this.state.dialogueEntries.length}
+            />
+          );
         });
 
         this.setState({
@@ -59,15 +63,17 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.sendMessage}>
-          <input type='text' name='message' />
-        </form>
-        {this.state.dialogueEntries}
+      <div className="home-page">
+        <div className="scrolling-chat">
+          {this.state.dialogueEntries}
+        </div>
         {
           this.state.loading ? <Loading />
           : null
         }
+        <form onSubmit={this.sendMessage} className="input">
+          <input type='text' name='message' />
+        </form>
       </div>
     );
   }

@@ -33,9 +33,8 @@
 
 // 5. Components
 @import
-  'components/Message';
+  'components/message';
 
 // 6. Page-specific styles
-// @import
-//   'pages/issue',
-//   'pages/category';
+@import
+  'pages/home-page';
