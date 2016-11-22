@@ -83,15 +83,14 @@
 
 .welcome-message {
   position: absolute;
-  display: block;
-  max-width: 100%;
+  display: flex;
+  max-width: 70%;
   top: 35%;
   bottom: 45%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
-  padding: 10px;
   text-align: center;
   font-size: 5vmin;
   color: #808080;
