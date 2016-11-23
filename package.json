@@ -8,7 +8,7 @@
     "dev-build": "./node_modules/.bin/webpack -w",
     "build": "./node_modules/.bin/webpack",
     "start": "node build/server.js",
-    "postinstall": "mkdir tmp && ./node_modules/.bin/webpack",
+    "postinstall": "mkdir tmp && ./node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
